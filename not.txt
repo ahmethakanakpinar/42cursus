@@ -1,2 +1,3 @@
 #include <stdio.h> anakütüphaneye eklendi sil
 
+kalan insanların neden kaldığına bak
