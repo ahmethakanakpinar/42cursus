@@ -1,5 +1,2 @@
 #include <stdio.h> anakütüphaneye eklendi sil
 
-
-
-ft_memset c yi char ile dene
