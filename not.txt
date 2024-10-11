@@ -1,3 +1,4 @@
 #include <stdio.h> anakütüphaneye eklendi sil
+hepsinin fonk adına bak ft var mı diye
 
 kalan insanların neden kaldığına bak
