@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:11:58 by aakpinar          #+#    #+#             */
-/*   Updated: 2024/10/14 12:05:08 by aakpinar         ###   ########.fr       */
+/*   Updated: 2024/10/14 19:28:26 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	{
 		if (*haystack == *needle && ft_strncmp(haystack, needle, n) == 0)
 			return ((char *)haystack);
-		++haystack;
-		--len;
+		haystack++;
+		len--;
 	}
 	return (NULL);
 }
