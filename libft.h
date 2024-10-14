@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:26:26 by aakpinar          #+#    #+#             */
-/*   Updated: 2024/10/14 12:11:48 by aakpinar         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:51:45 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
-//memcmp
+int		ft_memcmp(void *dest, const void *src, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
