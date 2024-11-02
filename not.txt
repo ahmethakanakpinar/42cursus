@@ -4,3 +4,5 @@ hepsinin fonk adına bak ft var mı diye
 kalan insanların neden kaldığına bak
 
 t_memcpy dene
+
+ft_split.c strict hatası düzelt
