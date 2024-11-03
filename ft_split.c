@@ -6,55 +6,74 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:15:39 by aakpinar          #+#    #+#             */
-/*   Updated: 2024/11/02 11:39:47 by aakpinar         ###   ########.fr       */
+/*   Updated: 2024/11/03 18:49:53 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_countwords(char const *str, char c)
+#include "libft.h"
+
+static int	ft_count_words(const char *s, char c)
 {
 	int	count;
 	int	i;
 
-	i = 0;
 	count = 0;
-	while (str[i])
+	i = 0;
+	if (s[i] == c || s[0] == '\0')
+		count--;
+	while (s[i])
 	{
-		while (str[i] == c)
-			i++;
-		if (str[i] != c && str[i] != '\0')
+		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
 			count++;
-		while (str[i] != c && str[i] != '\0')
-			i++;
+		i++;
 	}
-	return (count);
+	return (count + 1);
+}
+
+static int	ft_strlen_c(const char	*s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
+}
+
+static void	*ft_free_all(char **res, int i)
+{
+	while (i--)
+		free(res[i]);
+	free(res);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
+	char	**res;
 	int		i;
-	int		k;
-	int		tab_index;
-	char	**tab;
+	int		countwords;
 
 	if (!s)
 		return (NULL);
-	tab = (char **)malloc(sizeof(char *) * (ft_countwords(s, c) + 1));
-	if (!tab)
+	i = 0;
+	countwords = ft_count_words(s, c);
+	res = malloc(sizeof(char *) * (countwords + 1));
+	if (!res)
 		return (NULL);
 	i = 0;
-	tab_index = 0;
-	while (s[i])
+	while (i < countwords)
 	{
-		while (s[i] == c)
-			i++;
-		k = i;
-		while (s[i] != c && s[i] != '\0')
-			i++;
-		if (i > k)
-			tab[tab_index++] = ft_substr(s, k, i - k);
+		while (*s == c && *s)
+			s++;
+		res[i] = ft_substr(s, 0, ft_strlen_c(s, c));
+		if (res[i] == NULL)
+			return (ft_free_all(res, i));
+		s += ft_strlen_c(s, c);
+		i++;
 	}
-	tab[tab_index] = NULL;
-	return (tab);
+	res[i] = NULL;
+	return (res);
 }
