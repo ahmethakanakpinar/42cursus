@@ -6,74 +6,82 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:15:39 by aakpinar          #+#    #+#             */
-/*   Updated: 2024/11/03 18:49:53 by aakpinar         ###   ########.fr       */
+/*   Updated: 2024/11/13 22:09:11 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include "libft.h"
+static void	ft_free_split(char **_tab)
+{
+	int	i;
 
-static int	ft_count_words(const char *s, char c)
+	i = 0;
+	if (_tab)
+	{
+		while (_tab[i])
+		{
+			free(_tab[i]);
+			i++;
+		}
+		free(_tab);
+	}
+}
+
+static int	ft_countwords(char const *str, char c)
 {
 	int	count;
 	int	i;
 
-	count = 0;
 	i = 0;
-	if (s[i] == c || s[0] == '\0')
-		count--;
+	count = 0;
+	while (str[i])
+	{
+		while (str[i] == c)
+			i++;
+		if (str[i] != c && str[i] != '\0')
+			count++;
+		while (str[i] != c && str[i] != '\0')
+			i++;
+	}
+	return (count);
+}
+
+static char	**ft_fill_tab(char const *s, char c, char **tab)
+{
+	int		i;
+	int		k;
+	int		tab_index;
+
+	i = 0;
+	tab_index = 0;
 	while (s[i])
 	{
-		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
-			count++;
-		i++;
+		while (s[i] == c)
+			i++;
+		k = i;
+		while (s[i] != c && s[i])
+			i++;
+		if (i > k)
+		{
+			tab[tab_index] = ft_substr(s, k, i - k);
+			if (!tab[tab_index])
+				return (ft_free_split(tab), NULL);
+			tab_index++;
+		}
 	}
-	return (count + 1);
-}
-
-static int	ft_strlen_c(const char	*s, char c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	return (i);
-}
-
-static void	*ft_free_all(char **res, int i)
-{
-	while (i--)
-		free(res[i]);
-	free(res);
-	return (NULL);
+	tab[tab_index] = NULL;
+	return (tab);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**res;
-	int		i;
-	int		countwords;
+	char	**tab;
 
 	if (!s)
 		return (NULL);
-	i = 0;
-	countwords = ft_count_words(s, c);
-	res = malloc(sizeof(char *) * (countwords + 1));
-	if (!res)
+	tab = (char **)malloc(sizeof(char *) * (ft_countwords(s, c) + 1));
+	if (!tab)
 		return (NULL);
-	i = 0;
-	while (i < countwords)
-	{
-		while (*s == c && *s)
-			s++;
-		res[i] = ft_substr(s, 0, ft_strlen_c(s, c));
-		if (res[i] == NULL)
-			return (ft_free_all(res, i));
-		s += ft_strlen_c(s, c);
-		i++;
-	}
-	res[i] = NULL;
-	return (res);
+	return (ft_fill_tab(s, c, tab));
 }
