@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:32:41 by aakpinar          #+#    #+#             */
-/*   Updated: 2024/12/15 15:33:12 by aakpinar         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:01:27 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_putchar(char c)
 {
-	return (write (1, &c, 1));
+	write (1, &c, 1);
+	return(1);
 }
 
 int	ft_putstr(char *str)
