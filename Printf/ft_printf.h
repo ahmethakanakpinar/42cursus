@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:08:04 by aakpinar          #+#    #+#             */
-/*   Updated: 2024/12/15 15:09:36 by aakpinar         ###   ########.fr       */
+/*   Updated: 2024/12/15 15:41:20 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_putnbr(int nb);
+int	ft_u(unsigned int u);
+int	ft_pointer(unsigned long p);
+int	ft_hex(unsigned int x, int b);
 
 #endif
