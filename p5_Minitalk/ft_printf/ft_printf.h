@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 02:13:01 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/09 07:36:51 by aakpinar         ###   ########.fr       */
+/*   Created: 2024/12/15 15:08:04 by aakpinar          #+#    #+#             */
+/*   Updated: 2024/12/16 00:14:44 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# define _POSIX_C_SOURCE 200809L
-
-# include "ft_printf/ft_printf.h"
-# include <signal.h>
+# include <stdarg.h>
 # include <unistd.h>
-# include <stdlib.h>
 
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_putnbr(int nb);
+int	ft_u(unsigned int u);
+int	ft_pointer(unsigned long p);
+int	ft_hex(unsigned int x, int b);
+int	ft_check(char c, va_list arg);
+int	ft_printf(const char *str, ...);
 
 #endif
