@@ -6,48 +6,13 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 02:12:45 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/10 18:32:21 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/14 20:34:19 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minitalk.h"
 
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	a;
-	int	tmp;
-
-	i = 0;
-	a = 1;
-	tmp = 0;
-	while (str[i] == ' ' || (str[i] <= '\r' && str[i] >= '\t'))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			a *= -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		tmp = tmp * 10 + str[i] - 48;
-		i++;
-	}
-	return (tmp * a);
-}
-static void	send_bit(int pid, int bit)
+static	void	send_bit(int pid, int bit)
 {
 	if (bit == 1)
 	{
@@ -67,7 +32,7 @@ static void	send_bit(int pid, int bit)
 	}
 }
 
-static void	send_null_terminator(int pid, int *sent)
+static	void	send_null_terminator(int pid, int *sent)
 {
 	if (*sent < 8)
 	{

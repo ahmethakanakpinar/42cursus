@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 02:13:01 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/14 20:26:52 by aakpinar         ###   ########.fr       */
+/*   Created: 2024/11/03 16:10:49 by aakpinar          #+#    #+#             */
+/*   Updated: 2024/11/03 16:14:21 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# define _POSIX_C_SOURCE 200809L
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-#endif
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}

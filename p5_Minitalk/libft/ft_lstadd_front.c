@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 02:13:01 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/14 20:26:52 by aakpinar         ###   ########.fr       */
+/*   Created: 2024/11/03 19:01:58 by aakpinar          #+#    #+#             */
+/*   Updated: 2024/11/09 19:49:36 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# define _POSIX_C_SOURCE 200809L
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
+}
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
+// int main()
+// {
+// 	t_list *new = ft_lstnew(ft_strdup("ahmet"));
+// 	ft_lstadd_front(&new,(ft_lstnew(ft_strdup("hakan"))));
+// 	printf("%s\n %s\n",new->content,new->next->content);
 
-#endif
+// }
