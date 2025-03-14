@@ -10,27 +10,51 @@ OBJS_SERVER = $(SRCS_SERVER:.c=.o)
 OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 
 
+SRCS_SERVER_BONUS = server_bonus.c
+SRCS_CLIENT_BONUS = client_bonus.c
+OBJS_SERVER_BONUS = $(SRCS_SERVER_BONUS:.c=.o)
+OBJS_CLIENT_BONUS = $(SRCS_CLIENT_BONUS:.c=.o)
+
+
 NAME_SERVER = server
 NAME_CLIENT = client
+NAME_SERVER_BONUS = server_bonus
+NAME_CLIENT_BONUS = client_bonus
 
 
+LIBFTDIR    = libft
 PRINTF_DIR  = ft_printf
+LIBFT       = $(LIBFTDIR)/libft.a
 PRINTF      = $(PRINTF_DIR)/libftprintf.a
 
-all: $(PRINTF) $(NAME_SERVER) $(NAME_CLIENT)
 
+all: $(LIBFT) $(PRINTF) $(NAME_SERVER) $(NAME_CLIENT)
+
+bonus: $(LIBFT) $(PRINTF) $(NAME_SERVER_BONUS) $(NAME_CLIENT_BONUS)
+
+
+$(LIBFT):
+	@make -C $(LIBFTDIR)
 
 
 $(PRINTF):
 	@make -C $(PRINTF_DIR)
 
 
-$(NAME_SERVER): $(OBJS_SERVER) $(PRINTF)
-	$(CC) $(CFLAGS) $(OBJS_SERVER) $(PRINTF) -o $(NAME_SERVER)
+$(NAME_SERVER): $(OBJS_SERVER) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(OBJS_SERVER) $(LIBFT) $(PRINTF) -o $(NAME_SERVER)
 
 
-$(NAME_CLIENT): $(OBJS_CLIENT) $(PRINTF)
-	$(CC) $(CFLAGS) $(OBJS_CLIENT) $(PRINTF) -o $(NAME_CLIENT)
+$(NAME_CLIENT): $(OBJS_CLIENT) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(OBJS_CLIENT) $(LIBFT) $(PRINTF) -o $(NAME_CLIENT)
+
+
+$(NAME_SERVER_BONUS): $(OBJS_SERVER_BONUS) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(OBJS_SERVER_BONUS) $(LIBFT) $(PRINTF) -o $(NAME_SERVER_BONUS)
+
+
+$(NAME_CLIENT_BONUS): $(OBJS_CLIENT_BONUS) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(OBJS_CLIENT_BONUS) $(LIBFT) $(PRINTF) -o $(NAME_CLIENT_BONUS)
 
 
 %.o: %.c
@@ -38,13 +62,15 @@ $(NAME_CLIENT): $(OBJS_CLIENT) $(PRINTF)
 
 
 clean:
+	@make clean -C $(LIBFTDIR)
 	@make clean -C $(PRINTF_DIR)
-	$(RM) $(OBJS_SERVER) $(OBJS_CLIENT)
+	$(RM) $(OBJS_SERVER) $(OBJS_CLIENT) $(OBJS_SERVER_BONUS) $(OBJS_CLIENT_BONUS)
 
 fclean: clean
+	@make fclean -C $(LIBFTDIR)
 	@make fclean -C $(PRINTF_DIR)
-	$(RM) $(NAME_SERVER) $(NAME_CLIENT)
+	$(RM) $(NAME_SERVER) $(NAME_CLIENT) $(NAME_SERVER_BONUS) $(NAME_CLIENT_BONUS)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

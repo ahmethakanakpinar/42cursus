@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 02:13:01 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/14 20:26:52 by aakpinar         ###   ########.fr       */
+/*   Created: 2024/10/16 17:27:40 by aakpinar          #+#    #+#             */
+/*   Updated: 2024/10/26 01:11:41 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# define _POSIX_C_SOURCE 200809L
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+	size_t	len;
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-#endif
+	if (!s1 || !set)
+		return (NULL);
+	i = 0;
+	while (s1[i] && ft_strchr(set, s1[i]))
+		i++;
+	len = ft_strlen(s1);
+	if (i == len)
+		return (ft_strdup(""));
+	j = len - 1;
+	while (j > i && ft_strchr(set, s1[j]))
+		j--;
+	str = ft_substr(s1, i, j - i + 1);
+	return (str);
+}

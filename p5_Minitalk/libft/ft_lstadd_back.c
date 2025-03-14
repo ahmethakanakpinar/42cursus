@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 02:13:01 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/14 20:26:52 by aakpinar         ###   ########.fr       */
+/*   Created: 2024/11/09 20:03:29 by aakpinar          #+#    #+#             */
+/*   Updated: 2024/11/19 23:50:26 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# define _POSIX_C_SOURCE 200809L
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*current;
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-#endif
+	if (!lst || !(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	current = *lst;
+	while (current->next != NULL)
+		current = current->next;
+	current->next = new;
+}

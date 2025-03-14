@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 02:13:01 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/14 20:26:52 by aakpinar         ###   ########.fr       */
+/*   Created: 2024/10/11 04:18:05 by aakpinar          #+#    #+#             */
+/*   Updated: 2024/10/14 19:28:04 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# define _POSIX_C_SOURCE 200809L
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-#endif
+	ptr1 = (unsigned char *)s1;
+	ptr2 = (unsigned char *)s2;
+	while (n && *ptr1 && *ptr1 == *ptr2)
+	{
+		ptr1++;
+		ptr2++;
+		n--;
+	}
+	if (n)
+		return (*ptr1 - *ptr2);
+	else
+		return (0);
+}
