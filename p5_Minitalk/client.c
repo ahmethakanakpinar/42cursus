@@ -14,19 +14,19 @@
 
 static	void	send_bit(int pid, int bit)
 {
-	if (bit == 1)
+	if (bit == 0)
 	{
-		if (kill(pid, SIGUSR2) == -1)
+		if (kill(pid, SIGUSR1) == -1)
 		{
-			ft_printf("Error: enter correct pid \n");
+			ft_printf("Error: enter correct pid\n");
 			exit(1);
 		}
 	}
 	else
 	{
-		if (kill(pid, SIGUSR1) == -1)
+		if (kill(pid, SIGUSR2) == -1)
 		{
-			ft_printf("Error: enter correct pid\n");
+			ft_printf("Error: enter correct pid \n");
 			exit(1);
 		}
 	}
@@ -51,20 +51,20 @@ static void	ft_send_str(int pid, const char *str)
 	char				current_char;
 	int					current_bit;
 
-	if (str)
+	if (str != 0)
 	{
 		message = str;
 		bit_index = 0;
 		null_bits_sent = 0;
 	}
-	if (message && message[bit_index / 8])
+	if ((message != 0) && message[bit_index / 8])
 	{
 		current_char = message[bit_index / 8];
 		current_bit = (current_char >> (bit_index % 8)) & 1;
 		send_bit(pid, current_bit);
 		bit_index++;
 	}
-	else if (message)
+	else if (message != 0)
 		send_null_terminator(pid, &null_bits_sent);
 }
 
@@ -84,16 +84,16 @@ void	ft_receipt(int sig, siginfo_t *info, void *context)
 int	main(int ac, char **av)
 {
 	struct sigaction	sa;
-	int					server_pid;
+	int					pid;
 
 	if (ac != 3 || ft_strlen(av[1]) > 8)
 	{
-		ft_printf("\033[0;31mError: Invalid Argument Or PID\033[0m\n");
-		ft_printf("\033[0;31mUSED: ./client <server_pid> <string>\033[0m\n");
+		ft_printf("Error: Invalid Argument Or PID\n");
+		ft_printf("USED: ./client <server_pid> <string>\n");
 		return (1);
 	}
-	server_pid = ft_atoi(av[1]);
-	if (server_pid <= 0 || server_pid >= 4194304)
+	pid = ft_atoi(av[1]);
+	if (pid <= 0 || pid >= 4194304)
 		return (ft_printf("Error: Invalid PID\n"), 1);
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = ft_receipt;
@@ -101,7 +101,7 @@ int	main(int ac, char **av)
 	if (sigaction(SIGUSR1, &sa, NULL) == -1
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)
 		return (ft_printf("Error: sigaction\n"), 1);
-	ft_send_str(server_pid, av[2]);
+	ft_send_str(pid, av[2]);
 	while (1)
 		pause();
 }
