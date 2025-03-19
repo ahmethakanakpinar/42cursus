@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:16:33 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/18 22:09:27 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/19 21:04:58 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	get_row(char *map_file, t_game *game)
 	counter = 0;
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-		printf("ERROR Failed to open map file"); 
+		error_free_msg(game, "Error Failed to open map file"); 
 
 	temp = get_next_line(fd);
 	
@@ -31,7 +31,7 @@ void	get_row(char *map_file, t_game *game)
         free(temp);
     }
 	if (counter == 0)
-		printf("Error Empty file"); 
+		error_free_msg(game, "Error Empty file"); 
 
 
 	game->map.row = counter;
@@ -45,18 +45,18 @@ void	read_row(char *map_file, t_game *game)
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-		printf("Error Failed to open map file"); 
+		error_free_msg(game, "Error Failed to open map file"); 
 
 	i = 0;
     while (i < game->map.row)
     {
         char *temp = get_next_line(fd);
         if (!temp)
-			printf("Error: Failed to read row"); 
+			error_free_msg(game, "Error: Failed to read row"); 
         
         game->map.map[i] = trim_free(temp, "\n");
         if (!game->map.map[i])
-			printf("Malloc() err"); 
+			error_free_msg(game, "Malloc() err"); 
         i++;
     }
 	game->map.map[i] = NULL;
@@ -69,6 +69,6 @@ void	get_map(char *file_map, t_game *game)
 	get_row(file_map, game);
 	game->map.map = malloc((game->map.row + 1) * sizeof(char *));
 	if (!game->map.map)
-		printf("Malloc() error"); 
+		error_free_msg(game, "Malloc() error"); 
 	read_row(file_map, game);
 }
