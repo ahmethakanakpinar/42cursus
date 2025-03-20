@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:16:33 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/19 21:04:58 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:51:27 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	get_row(char *map_file, t_game *game)
 	if (fd == -1)
 		error_free_msg(game, "Error Failed to open map file"); 
 
-	temp = get_next_line(fd);
-	
     while ((temp = get_next_line(fd)) != NULL)
     {
         counter++;
@@ -33,6 +31,7 @@ void	get_row(char *map_file, t_game *game)
 	if (counter == 0)
 		error_free_msg(game, "Error Empty file"); 
 
+	printf("row %d\n ", counter);
 
 	game->map.row = counter;
 	close(fd);
@@ -67,6 +66,7 @@ void	read_row(char *map_file, t_game *game)
 void	get_map(char *file_map, t_game *game)
 {
 	get_row(file_map, game);
+	
 	game->map.map = malloc((game->map.row + 1) * sizeof(char *));
 	if (!game->map.map)
 		error_free_msg(game, "Malloc() error"); 

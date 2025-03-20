@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 19:34:56 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/20 20:03:07 by aakpinar         ###   ########.fr       */
+/*   Created: 2025/03/20 18:51:01 by aakpinar          #+#    #+#             */
+/*   Updated: 2025/03/20 18:51:02 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ac_check(int ac, char **av)
+void	init_mlx(t_game *game)
 {
-	if (ac != 2)
-		error_free_msg(NULL, "Error: Invalid number of ac"); 
-	if (*av[1] == '\0')
-        error_free_msg(NULL, "File Name is null");
-}
-
-int	main(int ac, char **av)
-{
-	t_game	game;
-
-	ac_check(ac, av);
-	game = init_game();
-	get_map(av[1], &game);
-	unioncheck(&game);
-	init_mlx(&game);
-	render_map(&game);
-	hook_n_run(&game);
-	return (EXIT_SUCCESS);
+	game->mlx_init = mlx_init();
+	if (!game->mlx_init)
+		error_free_msg(game, "Error : failed to initialize mlx");
+	game->mlx_wind = mlx_new_window(game->mlx_init, game->map.column
+			* BLOCK_SIZE, game->map.row * BLOCK_SIZE, "so_long");
+	if (!game->mlx_wind)
+		error_free_msg(game, "Error : Failed to open new window");
 }

@@ -6,23 +6,23 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:26:28 by aakpinar          #+#    #+#             */
-/*   Updated: 2024/12/25 19:53:17 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/20 19:34:55 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
+// size_t	ft_strlen(const char *s)
+// {
+// 	size_t	i;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	if (!s)
+// 		return (0);
+// 	while (s[i])
+// 		i++;
+// 	return (i);
+// }
 
 char	*ft_strchr(const char *s, int c)
 {
