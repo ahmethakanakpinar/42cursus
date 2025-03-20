@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:35:56 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/19 22:02:25 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/20 21:05:49 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
+#include <stdlib.h>
+
+
+# define WALL_BLOCK "textures/wall.xpm"
+# define FLOOR_BLOCK "textures/floor.xpm"
+# define PLAYER_BLOCK "textures/pac_man.xpm"
+# define PLAYER_RIGHT "textures/character/pac_open_right.xpm"
+# define PLAYER_LEFT "textures/character/pac_open_left.xpm"
+# define PLAYER_UP "textures/character/pac_open_up.xpm"
+# define PLAYER_DOWN "textures/character/pac_open_down.xpm"
+
+# define COLLECTIBLES_BLOCK "textures/pacdot.xpm"
+# define EXIT_BLOCK "textures/portal.xpm"
 # define BLOCK_SIZE 32
 
 
@@ -81,4 +94,21 @@ void	free_blocks(t_game *game);
 void	free_matrix(char **matrix);
 void	error_free(t_game *game);
 void	error_free_msg(t_game *game, char *error_msg);
+
+void	init_mlx(t_game *game);
+void	error_xpm(t_game *game);
+void	xpm_to_image(t_game *game);
+void	img_to_window(t_game *game);
+void	render_map(t_game *game);
+
+int	quit_game(t_game *game);
+int	on_press(int key, t_game *game);
+void	hook_n_run(t_game *game);
+
+void	put_player_block(t_game *game);
+void	which_block(t_game *game);
+void	update_left_behind_block(t_game *game);
+void	update_player_pos(t_game *game, bool horizontal, int length);
+
+
 #endif

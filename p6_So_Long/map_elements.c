@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:35:32 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/19 21:03:20 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/20 19:48:59 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,16 @@ void	check_count_el(t_game *game)
 				game->map.player++;
 				game->map.player_position = (t_position){col, row};
 			}
+			
+
 			col++;
 		}
 		row++;
 	}
+	printf("game->map.exit %d\n", game->map.exit);
+			printf("game->map.collectibles %d\n", game->map.collectibles);
+			printf("game->map.player %d\n", game->map.player);
+	
 	check_ecp(game);
 }
 

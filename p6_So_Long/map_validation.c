@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:35:42 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/19 20:35:43 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:52:08 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,25 @@ int	check_bor(t_map *map)
 {
 	int	i;
 
-	i = 0;
-	while (i < map->row)
-	{
-		if (map->map[i][0] != '1'
-			|| map->map[i][map->column - 1] != '1')
+	i = -1;
+	while (++i < map->row)
+		if (map->map[i][0] != '1' || map->map[i][map->column - 1] != '1')
 			return (0);
-		i++;
-	}
-	i = 0;
-	while (i < map->column)
-	{
-		if (map->map[0][i] != '1'
-			|| map->map[map->row - 1][i] != '1')
-			return (0);
-		i++;
-	}
+	i = -1;
+	while (++i < map->column)
+		if (map->map[0][i] != '1' || map->map[map->row - 1][i] != '1')
+		{
+
+printf("kontrol0 %c\n ", map->map[0][i]);
+printf("kontrol1 %c\n ", map->map[map->row - 1][i]);
+printf("kontrol2 %d\n ", map->row - 1);
+printf("kontrol2 %d\n ", i);
+return (0);
+		}
 	return (1);
 }
+
+
 
 int	check_str(char *str, int c)
 {
