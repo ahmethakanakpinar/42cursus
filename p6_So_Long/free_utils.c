@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:57:29 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/19 20:58:14 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/22 21:31:14 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,27 @@ void	free_blocks(t_game *game)
 		mlx_destroy_image(game->mlx_init, game->block.exit);
 	if (game->block.collectibles)
 		mlx_destroy_image(game->mlx_init, game->block.collectibles);
-	if (game->block.player)
-		mlx_destroy_image(game->mlx_init, game->block.player);
 	if (game->block.wall)
 		mlx_destroy_image(game->mlx_init, game->block.wall);
 	if (game->block.floor)
 		mlx_destroy_image(game->mlx_init, game->block.floor);
+	if (game->block.player)
+	{
+		if (game->block.player->img_up)
+			mlx_destroy_image(game->mlx_init,
+				game->block.player->img_up);
+		if (game->block.player->img_down)
+			mlx_destroy_image(game->mlx_init,
+				game->block.player->img_down);
+		if (game->block.player->img_left)
+			mlx_destroy_image(game->mlx_init,
+				game->block.player->img_left);
+		if (game->block.player->img_right)
+			mlx_destroy_image(game->mlx_init,
+				game->block.player->img_right);
+		free(game->block.player);
+		game->block.player = NULL;
+	}
 }
 
 void	free_matrix(char **matrix)

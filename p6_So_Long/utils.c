@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 19:56:10 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/19 18:52:20 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:55:26 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*ft_strncpy(char *dest, const char *src, size_t n)
 	return (dest);
 }
 
-
 char	*f_strchr(const char *str, int c)
 {
 	size_t	i;
@@ -38,10 +37,9 @@ char	*f_strchr(const char *str, int c)
 	i = 0;
 	while (str[i] && str[i] != c)
 		i++;
-    if (!str[i])
-        return (NULL);
-
-    return ((char *)str + i);
+	if (!str[i])
+		return (NULL);
+	return ((char *)str + i);
 }
 
 size_t	ft_strlen_endl(char *str)
@@ -72,7 +70,7 @@ char	*trim_free(char *s1, char const *set)
 	if (!trimmed_str)
 		return (NULL);
 	ft_strncpy(trimmed_str, s1 + start, end);
-    trimmed_str[end] = '\0';
+	trimmed_str[end] = '\0';
 	free(s1);
 	return (trimmed_str);
 }

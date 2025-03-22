@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 18:52:15 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/20 18:54:47 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:53:54 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ void	error_xpm(t_game *game)
 		error_free_msg(game, "Error in wall.xpm file");
 	if (!game->block.exit)
 		error_free_msg(game, "Error in exit.xpm file");
-	if (!game->block.player)
+	if (!game->block.player->img_left)
+		error_free_msg(game, "Error in player.xpm file");
+	if (!game->block.player->img_right)
+		error_free_msg(game, "Error in player.xpm file");
+	if (!game->block.player->img_down)
+		error_free_msg(game, "Error in player.xpm file");
+	if (!game->block.player->img_up)
 		error_free_msg(game, "Error in player.xpm file");
 	if (!game->block.floor)
 		error_free_msg(game, "Error in floor.xpm file");
@@ -35,8 +41,18 @@ void	xpm_to_image(t_game *game)
 			&img_size, &img_size);
 	game->block.floor = mlx_xpm_file_to_image(game->mlx_init, FLOOR_BLOCK,
 			&img_size, &img_size);
-	game->block.player = mlx_xpm_file_to_image(game->mlx_init, PLAYER_BLOCK,
-			&img_size, &img_size);
+	game->block.player = malloc(sizeof(t_player));
+	if (!game->block.player)
+		error_free_msg(game, "Malloc error for player struct");
+	game->block.player->img_up = mlx_xpm_file_to_image(game->mlx_init,
+			PLAYER_UP, &img_size, &img_size);
+	game->block.player->img_down = mlx_xpm_file_to_image(game->mlx_init,
+			PLAYER_DOWN, &img_size, &img_size);
+	game->block.player->img_left = mlx_xpm_file_to_image(game->mlx_init,
+			PLAYER_LEFT, &img_size, &img_size);
+	game->block.player->img_right = mlx_xpm_file_to_image(game->mlx_init,
+			PLAYER_RIGHT, &img_size, &img_size);
+	game->block.player->img = game->block.player->img_left;
 	game->block.collectibles = mlx_xpm_file_to_image(game->mlx_init,
 			COLLECTIBLES_BLOCK, &img_size, &img_size);
 	game->block.exit = mlx_xpm_file_to_image(game->mlx_init, EXIT_BLOCK,

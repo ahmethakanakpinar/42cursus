@@ -6,36 +6,18 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:15:01 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/20 21:06:29 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:52:46 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "so_long.h"
-
-
-// void	init_player(t_game *game)
-// {
-// 	game->player = ft_calloc(1, sizeof(t_player));
-// 	get_players_cords(game);
-// 	game->player->img_up = mlx_xpm_file_to_image(game->mlx_ptr,
-// 			PLAYER_UP, &game->player->width, &game->player->height);
-// 	game->player->img_down = mlx_xpm_file_to_image(game->mlx_ptr,
-// 			PLAYER_DOWN, &game->player->width, &game->player->height);
-// 	game->player->img_left = mlx_xpm_file_to_image(game->mlx_ptr,
-// 			PLAYER_LEFT, &game->player->width, &game->player->height);
-// 	game->player->img_right = mlx_xpm_file_to_image(game->mlx_ptr,
-// 			PLAYER_RIGHT, &game->player->width, &game->player->height);
-// 	game->player->img = game->player->img_left;
-// }
 
 void	put_player_block(t_game *game)
 {
-
 	game->moves += 1;
-	mlx_put_image_to_window(game->mlx_init, game->mlx_wind, game->block.player,
-		BLOCK_SIZE * game->map.player_position.x, BLOCK_SIZE
-		* game->map.player_position.y);
+	mlx_put_image_to_window(game->mlx_init, game->mlx_wind,
+		game->block.player->img, BLOCK_SIZE * game->map.player_position.x,
+		BLOCK_SIZE * game->map.player_position.y);
 	ft_printf("Move number: %d\n", game->moves);
 }
 
