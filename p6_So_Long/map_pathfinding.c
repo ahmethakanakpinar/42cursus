@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:35:37 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/20 19:09:38 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:37:19 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,9 @@ int	flood_fill(t_map *map, t_position curr, char **temp_map)
 }
 
 void	reset_flood_fill(t_map *map, t_position start, char **temp_map,
-        int *result)
+	int *result)
 {
-    // int	collectibles;
-    // int	exit_flag;
-
-    // collectibles = 0;
-    // exit_flag = 0;
-    *result = flood_fill(map, start, temp_map);
+	*result = flood_fill(map, start, temp_map);
 }
 
 void	check_path(t_game *game)
