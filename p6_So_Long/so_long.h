@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 20:35:56 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/22 23:01:55 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/23 00:00:01 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define PLAYER_DOWN "textures/character/pac_open_down.xpm"
 # define COLLECTIBLES_BLOCK "textures/pacdot.xpm"
 # define EXIT_BLOCK "textures/portal.xpm"
-# define BLOCK_SIZE 32
+# define BLOCK_SIZE 64
 
 typedef struct s_position
 {
