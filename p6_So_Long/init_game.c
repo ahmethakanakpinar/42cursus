@@ -26,6 +26,6 @@ t_game	init_game(void)
 		.block.floor = NULL,
 		.block.player = NULL,
 		.block.wall = NULL,
-		.moves = -1,
+		.moves = 0,
 	});
 }
