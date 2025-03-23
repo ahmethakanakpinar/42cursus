@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:15:01 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/03/22 22:52:46 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/03/23 03:46:04 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 void	put_player_block(t_game *game)
 {
-	game->moves += 1;
+	char	*moves_str;
+
 	mlx_put_image_to_window(game->mlx_init, game->mlx_wind,
-		game->block.player->img, BLOCK_SIZE * game->map.player_position.x,
+		game->block.player->img,
+		BLOCK_SIZE * game->map.player_position.x,
 		BLOCK_SIZE * game->map.player_position.y);
+	mlx_put_image_to_window(game->mlx_init, game->mlx_wind,
+		game->block.wall, 0, 0);
+	moves_str = ft_itoa(game->moves);
+	mlx_string_put(game->mlx_init, game->mlx_wind, 10, 15, 0xFFFFFF, moves_str);
 	ft_printf("Move number: %d\n", game->moves);
+	free(moves_str);
 }
 
 void	which_block(t_game *game)
@@ -73,6 +80,7 @@ void	update_player_pos(t_game *game, bool horizontal, int length)
 		update_left_behind_block(game);
 		game->map.player_position.y += length;
 	}
+	game->moves++;
 	which_block(game);
 	put_player_block(game);
 }

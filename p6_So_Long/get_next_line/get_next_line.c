@@ -106,5 +106,10 @@ char	*get_next_line(int fd)
 		return (NULL);
 	mainline = get_main_line(putline);
 	putline = get_putremain(putline);
+	if (!putline || !*putline)
+	{
+		free(putline);
+		putline = NULL;
+	}
 	return (mainline);
 }
