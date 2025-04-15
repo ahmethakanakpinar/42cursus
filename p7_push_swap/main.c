@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 04:56:37 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/04/15 04:57:44 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/04/15 21:41:16 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ static int	arg_counter(char **av)
 	while (av[count] != NULL)
 		count++;
 	return (count + 1);
+}
+
+void	ft_free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	if (!split)
+		return ;
+	while (split[i])
+		free(split[i++]);
+	free(split);
 }
 
 int	main(int ac, char **av)
@@ -36,8 +48,8 @@ int	main(int ac, char **av)
 	else if (ac == 2)
 	{
 		av = ft_split(av[1], ' ');
-		if (av == NULL)
-			return (1);
+		if (av == NULL || av[0] == NULL)
+			return (ft_free_split(av), 1);
 		ac = arg_counter(av);
 	}
 	else
