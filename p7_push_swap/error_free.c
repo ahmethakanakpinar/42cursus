@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 05:04:29 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/04/14 06:02:56 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/04/15 04:10:12 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	free_stack(t_stack **stack)
 	*stack = NULL;
 }
 
-void	error_free(t_stack **a, char **argv, int is_split_arg, int *numbers)
+void	error_free(t_stack **a, char **argv, int is_split_arg, long *numbers)
 {
 	free_stack(a);
 	if (numbers != NULL)
@@ -53,7 +53,7 @@ void	error_free(t_stack **a, char **argv, int is_split_arg, int *numbers)
 
 int	error_syntax(char *str)
 {
-	int error_found;
+	int	error_found;
 	int	i;
 
 	error_found = 0;
@@ -73,7 +73,7 @@ int	error_syntax(char *str)
 	return (error_found);
 }
 
-int	error_repetition(int *stack, int size)
+int	error_repetition(long *stack, int size)
 {
 	int	i;
 	int	j;

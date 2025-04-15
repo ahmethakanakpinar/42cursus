@@ -6,20 +6,20 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 04:56:37 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/04/14 05:56:29 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/04/15 04:57:44 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
 static int	arg_counter(char **av)
 {
-    int count = 0;
-    
-    while (av[count] != NULL)
-        count++;
-    return (count + 1);
+	int	count;
+
+	count = 0;
+	while (av[count] != NULL)
+		count++;
+	return (count + 1);
 }
 
 int	main(int ac, char **av)
@@ -43,6 +43,10 @@ int	main(int ac, char **av)
 	else
 		av += 1;
 	stack_init(&a, av, ac, size == 2);
-	
+	if (!stack_sorted(a))
+		radix_sort(&a, &b, stack_len(a));
+	free_stack(&a);
+	if (stack_len(b) != 0)
+		free_stack(&b);
 	return (0);
 }

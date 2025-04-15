@@ -7,10 +7,14 @@ PRINTFDIR = ft_printf
 NAME = push_swap
 
 SRCS = main.c \
+		action.c \
 		error_free.c \
 		list_utils.c \
 		normal.c \
+		sorting.c \
 		stack_init.c \
+		tiny_sort.c \
+		ft_atol.c \
 
 
 OBJS = $(SRCS:.c=.o)
