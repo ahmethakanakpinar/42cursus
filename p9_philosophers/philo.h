@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:38:07 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/08/27 00:55:36 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/08/27 01:05:36 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,11 @@ long long	get_time(void);
 int	validate_arguments(int argc, char **argv);
 int		error_msg_with_index(int index, char *str);
 long long	get_time(void);
+int	parse_args(t_table *table, int argc, char **argv);
+int	init_table(t_table *table, int argc, char **argv);
+int	init_fork_mutexes(t_table *table);
+int	init_mutex(t_table *table);
+int	init_philosophers(t_table *table);
+void	destroy_table(t_table *table);
 
 #endif
