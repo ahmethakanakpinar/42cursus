@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:37:57 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/08/27 00:52:58 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/08/27 01:05:27 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,25 @@ void	destroy_forks(t_table *table, int count)
 	i = -1;
 	while (++i < count)
 		pthread_mutex_destroy(&table->forks[i]);
+}
+void	destroy_table(t_table *table)
+{
+	int i;
+	
+	if (table->philosophers)
+	{
+		i = 0;
+		while (i < table->philo_count)
+		{
+			pthread_mutex_destroy(&table->forks[i]);
+			i++;
+		}
+		pthread_mutex_destroy(&table->print_mutex);
+		pthread_mutex_destroy(&table->death_mutex);
+		pthread_mutex_destroy(&table->last_meal_mutex);
+		free(table->philosophers);
+		free(table->forks);
+		table->philosophers = NULL;
+		table->forks = NULL;
+	}
 }
