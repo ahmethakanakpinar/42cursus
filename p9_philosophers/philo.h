@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:38:07 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/07/26 00:27:26 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/08/27 00:55:36 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@
 # define SUCCESS 0
 # define ERROR 1
 # define MAX_PHILOS 200
-# define WARNING_ARGS "%sWarning: time below 60ms might cause timing issues%s\n"
 
-// Colors for status messages
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
 # define YELLOW "\033[0;33m"
@@ -39,7 +37,6 @@
 # define WHITE "\033[0;97m"
 # define MAGENTA "\033[0;95m"
 
-// Philosopher states
 typedef enum e_state
 {
 	THINKING,
@@ -49,22 +46,21 @@ typedef enum e_state
 	DIED
 }					t_state;
 
-// Structure for each philosopher
 typedef struct s_philo
 {
 	int				id;
-	int				meals_eaten;
+	int				eaten_meal;
 	long long		last_meal;
 	t_state			state;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	struct s_data	*data;
+	struct s_table	*table;
 }					t_philo;
 
-typedef struct s_data
+typedef struct s_table
 {
-	int				num_philos;
+	int				philo_count;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -76,8 +72,14 @@ typedef struct s_data
 	pthread_mutex_t	last_meal_mutex;
 	pthread_mutex_t	death_mutex;
 	t_philo			*philosophers;
-}					t_data;
+}					t_table;
 
 int		error_msg(char *str);
+int		ft_atoi(const char *str);
+void	destroy_forks(t_table *table, int count);
+long long	get_time(void);
+int	validate_arguments(int argc, char **argv);
+int		error_msg_with_index(int index, char *str);
+long long	get_time(void);
 
 #endif
