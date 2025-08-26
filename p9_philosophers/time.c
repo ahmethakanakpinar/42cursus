@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 11:38:24 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/08/27 00:55:47 by aakpinar         ###   ########.fr       */
+/*   Created: 2025/07/23 11:40:12 by aakpinar          #+#    #+#             */
+/*   Updated: 2025/08/27 00:55:12 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+long long	get_time(void)
 {
-	t_table	table;
+	struct timeval	time;
 
-	if (validate_arguments(argc, argv) != SUCCESS)
-		return (ERROR);
-	
-	return (SUCCESS);
+	if (gettimeofday(&time, NULL) == -1)
+		return (error_msg("gettimeofday() failed"));
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
