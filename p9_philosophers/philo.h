@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:38:07 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/08/27 01:05:36 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/08/28 22:51:09 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_philo
 {
 	int				id;
 	int				eaten_meal;
-	long long		last_meal;
+	long			last_meal;
 	t_state			state;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
@@ -66,26 +66,50 @@ typedef struct s_table
 	int				time_to_sleep;
 	int				must_eat;
 	bool			someone_died;
-	long long		start_time;
+	long			start_time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	print_mutex;	
 	pthread_mutex_t	last_meal_mutex;
 	pthread_mutex_t	death_mutex;
 	t_philo			*philosophers;
 }					t_table;
 
-int		error_msg(char *str);
-int		ft_atoi(const char *str);
-void	destroy_forks(t_table *table, int count);
-long long	get_time(void);
+
+int	is_valid_number(char *str);
+int	check_limits(char *str);
+int	check_philo_number(char *str);
 int	validate_arguments(int argc, char **argv);
-int		error_msg_with_index(int index, char *str);
-long long	get_time(void);
+
 int	parse_args(t_table *table, int argc, char **argv);
 int	init_table(t_table *table, int argc, char **argv);
 int	init_fork_mutexes(t_table *table);
 int	init_mutex(t_table *table);
 int	init_philosophers(t_table *table);
+
+bool	all_ate_enough(t_table *table);
+bool	check_philosopher_death(t_table *table, int i);
+bool	check_simulation_end(t_table *table);
+void	*monitor_routine(void *table_void);
+bool	check_death(t_table *table);
+
+
+int	take_forks(t_philo *philo);
+void	drop_forks(t_philo *philo);
+int	eat(t_philo *philo);
+int	sleep_and_think(t_philo *philo);
+void	*philosopher_routine(void *philosopher_void);
+
+
+long	get_time(void);
+long	time_diff(long past, long present);
+void	precise_sleep(long time);
+
+int	error_msg(char *str);
+int	error_msg_with_index(int index, char *str);
+int	ft_atoi(const char *str);
+void	destroy_forks(t_table *table, int count);
 void	destroy_table(t_table *table);
+
+void	print_status(t_philo *philo, t_state state);
 
 #endif
