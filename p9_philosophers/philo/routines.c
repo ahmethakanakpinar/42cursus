@@ -6,22 +6,24 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:53:18 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/08/28 22:16:52 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/08/31 16:24:55 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 int	take_forks(t_philo *philo)
 {
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
 
-	if (philo->id % 2 == 0) {
+	if (philo->id % 2 == 0)
+	{
 		first = philo->right_fork;
 		second = philo->left_fork;
-	} else {
+	}
+	else
+	{
 		first = philo->left_fork;
 		second = philo->right_fork;
 	}
@@ -37,18 +39,18 @@ void	drop_forks(t_philo *philo)
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
 
-	if (philo->id % 2 == 0) {
+	if (philo->id % 2 == 0)
+	{
 		first = philo->right_fork;
 		second = philo->left_fork;
-	} else {
+	}
+	else
+	{
 		first = philo->left_fork;
 		second = philo->right_fork;
 	}
-
-	// Mutex unlock sırası: lock edilen sıranın tersinde
-	// Lock: first → second, Unlock: second → first
-	pthread_mutex_unlock(second);  // Lock edilen sonuncuyu önce unlock et
-	pthread_mutex_unlock(first);   // Lock edilen ilkini sonra unlock et
+	pthread_mutex_unlock(second);
+	pthread_mutex_unlock(first);
 }
 
 int	eat(t_philo *philo)

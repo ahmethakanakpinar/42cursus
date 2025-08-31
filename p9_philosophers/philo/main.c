@@ -6,13 +6,11 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:38:24 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/08/28 23:13:55 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/08/31 16:20:58 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-
 
 void	print_status(t_philo *philo, t_state state)
 {
@@ -26,7 +24,7 @@ void	print_status(t_philo *philo, t_state state)
 		if (state == FORK_TAKEN)
 			printf("%ld %i has taken a fork\n",
 				time, philo->id);
-		else if (state == EATING)	
+		else if (state == EATING)
 			printf("%ld %i is eating\n",
 				time, philo->id);
 		else if (state == SLEEPING)
@@ -68,22 +66,14 @@ static int	start_threads(t_table *table)
 	return (SUCCESS);
 }
 
-
-
-
-
-
 static int	handle_one_philo(t_table *table)
 {
 	print_status(&table->philosophers[0], THINKING);
-	// Single philosopher can't eat because they need two forks
-	// They will die after time_to_die from start
 	precise_sleep(table->time_to_die);
 	print_status(&table->philosophers[0], DIED);
 	table->someone_died = true;
-	return (SUCCESS);	
+	return (SUCCESS);
 }
-
 
 int	main(int argc, char **argv)
 {
@@ -97,7 +87,6 @@ int	main(int argc, char **argv)
 		return (destroy_table(&table), ERROR);
 	if (init_philosophers(&table) != SUCCESS)
 		return (destroy_table(&table), ERROR);
-
 	if (table.philo_count == 1)
 	{
 		handle_one_philo(&table);
