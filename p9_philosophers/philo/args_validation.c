@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 00:02:17 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/08/27 02:59:43 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/08/31 16:18:42 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,31 +57,31 @@ int	check_philo_number(char *str)
 
 	num = ft_atoi(str);
 	if (num < 1)
-		return (error_msg_with_index(2, "need at least 1 philosopher"));
+		return (error_msg("need at least 1 philosopher"));
 	if (num > MAX_PHILOS)
-		return (error_msg_with_index(2, "too many philosophers (max 200)"));
+		return (error_msg("too many philosophers (max 200)"));
 	return (SUCCESS);
 }
-
 
 int	validate_arguments(int argc, char **argv)
 {
 	int	i;
 
-	if (argc < 5 || argc > 6)
-		return (error_msg("Invalid number of arguments. Expected 5 or 6 arguments."));
 	i = 1;
+	if (argc < 5 || argc > 6)
+		return (error_msg("Invalid number of arguments. \
+			Expected 5 or 6 arguments."));
 	while (i < argc)
 	{
 		if (!is_valid_number(argv[i]))
-			return (error_msg_with_index(i+1, "invalid argument format"));
+			return (error_msg("invalid argument format"));
 		if (!check_limits(argv[i]))
-			return (error_msg_with_index(i+1, "argument too large"));
+			return (error_msg("argument too large"));
 		i++;
 	}
 	if (check_philo_number(argv[1]) != SUCCESS)
 		return (ERROR);
 	if (argc == 6 && ft_atoi(argv[5]) < 1)
-		return (error_msg_with_index(6, "meals number must be positive"));
+		return (error_msg("meals number must be positive"));
 	return (SUCCESS);
 }

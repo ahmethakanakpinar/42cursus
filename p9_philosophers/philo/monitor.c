@@ -6,12 +6,11 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 03:08:20 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/08/28 23:12:10 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/08/31 19:10:19 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 bool	all_ate_enough(t_table *table)
 {
@@ -22,11 +21,13 @@ bool	all_ate_enough(t_table *table)
 		return (false);
 	finished = 0;
 	i = -1;
+	pthread_mutex_lock(&table->last_meal_mutex);
 	while (++i < table->philo_count)
 	{
 		if (table->philosophers[i].eaten_meal >= table->must_eat)
 			finished++;
 	}
+	pthread_mutex_unlock(&table->last_meal_mutex);
 	return (finished == table->philo_count);
 }
 
@@ -44,7 +45,7 @@ bool	check_philosopher_death(t_table *table, int i)
 		{
 			table->someone_died = true;
 			pthread_mutex_lock(&table->print_mutex);
-			printf("%ld %i died\n", time,
+			printf("%ld %i died\n", time_diff(table->start_time, get_time()),
 				table->philosophers[i].id);
 			pthread_mutex_unlock(&table->print_mutex);
 		}
@@ -87,6 +88,7 @@ void	*monitor_routine(void *table_void)
 			return (NULL);
 	}
 }
+
 bool	check_death(t_table *table)
 {
 	bool	died;
