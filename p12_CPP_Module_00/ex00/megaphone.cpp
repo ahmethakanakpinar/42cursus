@@ -6,7 +6,7 @@
 /*   By: aakpinar < aakpinar@student.42istanbul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 11:54:53 by aakpinar          #+#    #+#             */
-/*   Updated: 2025/12/26 12:02:05 by aakpinar         ###   ########.fr       */
+/*   Updated: 2025/12/26 13:25:01 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(int argc, char **argv)
         std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
         return 0;
     }
-    for (int i = 1; i < argc[i]; i++)
+    for (int i = 1; i < argc; i++)
     {
         for (int j = 0; argv[i][j]; j++)
         {
