@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakpinar < aakpinar@student.42istanbul.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/02 04:34:02 by aakpinar          #+#    #+#             */
+/*   Updated: 2026/01/02 04:39:01 by aakpinar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "PhoneBook.hpp"
+
 enum Command
 {
     ADD,
@@ -39,6 +53,7 @@ int main()
         {
             case ADD:
                 // ADD logic here
+                phoneBook.addContact();
                 break;
             case SEARCH:
                 // SEARCH logic here
