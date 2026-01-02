@@ -6,13 +6,14 @@
 /*   By: aakpinar < aakpinar@student.42istanbul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:33:33 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/02 04:42:07 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/02 04:51:55 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
 
+#include "Contact.hpp"
 #include <iostream>
 #include <string>
 
@@ -26,13 +27,15 @@ public:
     PhoneBook();
     ~PhoneBook();
     
-    // New method to add a contact
+    // Add a new contact
     void addContact();
-
+    
    
 
 private:
-   
+    Contact contacts[8];
+    int oldestIndex;
+    int count;
     
 
    
