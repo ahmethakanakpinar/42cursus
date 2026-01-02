@@ -6,7 +6,7 @@
 /*   By: aakpinar < aakpinar@student.42istanbul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:45:57 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/02 05:00:05 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/02 05:21:30 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ public:
 private:
     // Helper method for getting non-empty input
     static std::string getValidInput(const std::string& prompt);
+    // Helper method for phone number validation
+    static std::string getValidPhoneNumber();
     std::string _firstName;
     std::string _lastName;
     std::string _nickname;

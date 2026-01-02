@@ -6,7 +6,7 @@
 /*   By: aakpinar < aakpinar@student.42istanbul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:59:09 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/02 05:00:22 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/02 05:23:24 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,69 @@ std::string Contact::getValidInput(const std::string& prompt)
     }
 }
 
+// Helper method specifically for phone number validation
+std::string Contact::getValidPhoneNumber()
+{
+    std::string input;
+    
+    while (true)
+    {
+        std::cout << CYAN << "Phone Number (10 digits): " << RESET;
+        std::getline(std::cin, input);
+        
+        if (std::cin.eof())
+        {
+            std::cout << RED << "\nInput interrupted!" << RESET << std::endl;
+            exit(1);
+        }
+        
+        // Remove leading/trailing whitespace
+        size_t start = 0;
+        size_t end = input.length();
+        
+        while (start < end && std::isspace(input[start]))
+            start++;
+        while (end > start && std::isspace(input[end - 1]))
+            end--;
+            
+        input = input.substr(start, end - start);
+        
+        // Check if empty
+        if (input.empty())
+        {
+            std::cout << RED << "Phone number cannot be empty!" << RESET << std::endl;
+            continue;
+        }
+        
+        // Check if exactly 10 characters
+        if (input.length() != 10)
+        {
+            std::cout << RED << "Phone number must be exactly 10 digits!" << RESET << std::endl;
+            continue;
+        }
+        
+        // Check if all characters are digits
+        bool allDigits = true;
+        for (size_t i = 0; i < input.length(); i++)
+        {
+            if (!std::isdigit(input[i]))
+            {
+                allDigits = false;
+                break;
+            }
+        }
+        
+        if (!allDigits)
+        {
+            std::cout << RED << "Phone number must contain only digits!" << RESET << std::endl;
+            continue;
+        }
+        
+        // All validations passed
+        return input;
+    }
+}
+
 // Static factory method to create a Contact from user input
 Contact Contact::createFromInput()
 {
@@ -121,7 +184,7 @@ Contact Contact::createFromInput()
     contact.setFirstName(getValidInput("First Name: "));
     contact.setLastName(getValidInput("Last Name: "));
     contact.setNickname(getValidInput("Nickname: "));
-    contact.setPhoneNumber(getValidInput("Phone Number: "));
+    contact.setPhoneNumber(getValidPhoneNumber());  // Use specialized validator
     contact.setSecret(getValidInput("Darkest Secret: "));
     
     return contact;
