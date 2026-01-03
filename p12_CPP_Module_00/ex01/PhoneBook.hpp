@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:33:33 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/03 22:18:27 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/03 23:54:27 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ private:
     // Helper methods
     static std::string formatString(const std::string& str);
     static std::string intToString(int num);
+    void displayContactDetails(int index) const;
 };
 
 #endif
