@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakpinar < aakpinar@student.42istanbul.    +#+  +:+       +#+        */
+/*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:45:57 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/02 05:39:30 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/04 00:09:12 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
