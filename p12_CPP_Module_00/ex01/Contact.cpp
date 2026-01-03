@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakpinar < aakpinar@student.42istanbul.    +#+  +:+       +#+        */
+/*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:59:09 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/02 05:23:24 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/04 00:09:59 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ Contact Contact::createFromInput()
     contact.setFirstName(getValidInput("First Name: "));
     contact.setLastName(getValidInput("Last Name: "));
     contact.setNickname(getValidInput("Nickname: "));
-    contact.setPhoneNumber(getValidPhoneNumber());  // Use specialized validator
+    contact.setPhoneNumber(getValidPhoneNumber());
     contact.setSecret(getValidInput("Darkest Secret: "));
     
     return contact;
