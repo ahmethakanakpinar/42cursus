@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:42:47 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/03 22:15:39 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/03 23:52:18 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,55 @@ void PhoneBook::searchContacts()
     }
     displayAllContacts();
 
+    std::string input;
+    int index;
+
+    while (true)
+    {
+        std::cout << "\nEnter the index of your Search";
+        std::getline(std::cin, input);
+
+        if (std::cin.eof())
+        {
+            std::cout << RED << "\nSearch interrupted!" << RESET << std::endl;
+            return;
+        }
+
+        // Check if input is empty
+        if (input.empty())
+        {
+            std::cout << RED << "Please enter a valid index." << RESET << std::endl;
+            continue;
+        }
+
+        // Check if all characters are digits
+        bool isNumber = true;
+        for (size_t i = 0; i < input.length(); i++)
+        {
+            if (!isdigit(input[i]))
+            {
+                isNumber = false;
+                break;
+            }
+        }
+
+        if (!isNumber)
+        {
+            std::cout << RED << "Invalid input. Please enter a number." << RESET << std::endl;
+            continue;
+        }
+
+        index = std::atoi(input.c_str());
+
+        if (index < 1 || index > this->count)
+        {
+            std::cout << RED << "Invalid index! Please enter a number between 1 and " 
+                      << this->count << "." << RESET << std::endl;
+            continue;
+        }
+
+        return;
+    }
 
   
 }
@@ -112,3 +161,4 @@ std::string PhoneBook::formatString(const std::string& str)
     
     return formatted;
 }
+
