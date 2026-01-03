@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:42:47 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/03 23:52:18 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/04 00:00:18 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void PhoneBook::searchContacts()
 
     while (true)
     {
-        std::cout << "\nEnter the index of your Search";
+        std::cout << "\nEnter the index of your Search (1 = oldest): ";
         std::getline(std::cin, input);
 
         if (std::cin.eof())
@@ -88,7 +88,8 @@ void PhoneBook::searchContacts()
                       << this->count << "." << RESET << std::endl;
             continue;
         }
-
+        
+        displayContactDetails(index - 1);
         return;
     }
 
@@ -162,3 +163,19 @@ std::string PhoneBook::formatString(const std::string& str)
     return formatted;
 }
 
+void PhoneBook::displayContactDetails(int index) const
+{
+    if (index < 0 || index >= this->count)
+    {
+        std::cout << RED << "Invalid index!" << RESET << std::endl;
+        return;
+    }
+
+    std::cout << "\n" << GREEN << "====== Contact Details ======" << RESET << std::endl;
+    std::cout << CYAN << "First Name    : " << RESET << this->contacts[index].getFirstName() << std::endl;
+    std::cout << CYAN << "Last Name     : " << RESET << this->contacts[index].getLastName() << std::endl;
+    std::cout << CYAN << "Nickname      : " << RESET << this->contacts[index].getNickname() << std::endl;
+    std::cout << CYAN << "Phone Number  : " << RESET << this->contacts[index].getPhoneNumber() << std::endl;
+    std::cout << CYAN << "Darkest Secret: " << RESET << this->contacts[index].getSecret() << std::endl;
+    std::cout << GREEN << "=============================" << RESET << std::endl;
+}
