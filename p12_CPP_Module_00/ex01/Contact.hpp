@@ -6,13 +6,14 @@
 /*   By: aakpinar < aakpinar@student.42istanbul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:45:57 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/02 05:21:30 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/02 05:39:30 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 #include <string>
+#include <cstdlib>
 
 class Contact {
 public:
