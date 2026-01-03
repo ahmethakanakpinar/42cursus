@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakpinar < aakpinar@student.42istanbul.    +#+  +:+       +#+        */
+/*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:34:02 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/02 04:41:31 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/03 21:58:05 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int main()
                 break;
             case SEARCH:
                 // SEARCH logic here
+                phoneBook.searchContacts();
                 break;
             case EXIT:
                 break;
@@ -68,3 +69,5 @@ int main()
     std::cout << GREEN << "Goodbye!" << RESET << std::endl;
     return(0);
 }
+
+
