@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 04:42:47 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/04 00:00:18 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/22 01:03:27 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,6 @@ void PhoneBook::searchContacts()
 
 void PhoneBook::displayAllContacts() const
 {
-    if (this->count == 0)
-    {
-        std::cout << RED << "No contacts to display." << RESET << std::endl;
-        return;
-    }
 
     std::cout << "\n" << CYAN << "---------------------------------------------" << RESET << std::endl;
     std::cout << CYAN << "|" << RESET << formatString("Index") << CYAN << "|" << RESET;
@@ -124,28 +119,7 @@ void PhoneBook::displayAllContacts() const
 
 std::string PhoneBook::intToString(int num)
 {
-    if (num == 0)
-        return "0";
-    
-    std::string result;
-    bool isNegative = false;
-    
-    if (num < 0)
-    {
-        isNegative = true;
-        num = -num;
-    }
-    
-    while (num > 0)
-    {
-        result = static_cast<char>('0' + (num % 10)) + result;
-        num /= 10;
-    }
-    
-    if (isNegative)
-        result = "-" + result;
-    
-    return result;
+    return std::string(1, '0' + num);
 }
 
 std::string PhoneBook::formatString(const std::string& str)
@@ -165,12 +139,6 @@ std::string PhoneBook::formatString(const std::string& str)
 
 void PhoneBook::displayContactDetails(int index) const
 {
-    if (index < 0 || index >= this->count)
-    {
-        std::cout << RED << "Invalid index!" << RESET << std::endl;
-        return;
-    }
-
     std::cout << "\n" << GREEN << "====== Contact Details ======" << RESET << std::endl;
     std::cout << CYAN << "First Name    : " << RESET << this->contacts[index].getFirstName() << std::endl;
     std::cout << CYAN << "Last Name     : " << RESET << this->contacts[index].getLastName() << std::endl;
