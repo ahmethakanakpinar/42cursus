@@ -6,7 +6,13 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 01:13:46 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/22 01:13:47 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/28 03:18:22 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Zombie.hpp"
+
+Zombie* newZombie(std::string name)
+{
+    return new Zombie(name);
+}
