@@ -6,12 +6,11 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 04:12:11 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/28 04:18:00 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/28 04:19:11 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
 
 int main()
 {
