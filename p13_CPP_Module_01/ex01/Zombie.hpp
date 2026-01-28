@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 03:47:02 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/28 03:50:45 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/28 03:59:09 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ class Zombie
         Zombie(std::string name);
         ~Zombie();
         void announce(void);
+        void setName(std::string name);
+
 
 };
 Zombie* newZombie(std::string name);
