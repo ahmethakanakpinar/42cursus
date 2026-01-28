@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 01:12:54 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/28 03:15:17 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/28 03:31:02 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class Zombie
         void announce(void);
 
 };
-Zombie* createZombie(std::string name);
+Zombie* newZombie(std::string name);
+void randomChump( std::string name );
 
 #endif
