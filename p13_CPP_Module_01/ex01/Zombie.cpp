@@ -6,7 +6,7 @@
 /*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 03:47:14 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/28 03:50:42 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/01/28 04:00:31 by aakpinar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,8 @@ Zombie::~Zombie()
 void Zombie::announce(void)
 {
     std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
+void Zombie::setName(std::string name)
+{
+    this->_name = name;
 }
