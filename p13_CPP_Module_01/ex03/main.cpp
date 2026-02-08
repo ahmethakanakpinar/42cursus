@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakpinar <aakpinar@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: ahmethakan <ahmethakan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 04:20:50 by aakpinar          #+#    #+#             */
-/*   Updated: 2026/01/28 04:20:50 by aakpinar         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:23:20 by ahmethakan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Weapon.hpp"
+
+int main()
+{
+    Weapon club = Weapon("crude spiked club");
+    return 0;
+}
