@@ -8,8 +8,14 @@ class Fixed
 public:
     Fixed();
     ~Fixed();
+	int getRawBits(void) const;
+	void setRawBits(int const raw);
+
+
 
 private:
+    int _rawBits;
+    static const int _fractionalBits = 8;
 
 };
 
