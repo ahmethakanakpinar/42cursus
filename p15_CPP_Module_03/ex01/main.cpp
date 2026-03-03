@@ -1,48 +1,53 @@
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main()
 {
     std::cout << std::endl;
     std::cout << "\033[1;95m╔════════════════════════════════════════════════════════════╗\033[0m" << std::endl;
-    std::cout << "\033[1;95m║                     🎮 CLAPTRAP 🎮                         ║\033[0m" << std::endl;
-    std::cout << "\033[1;95m║                          ex00                              ║\033[0m" << std::endl;
+    std::cout << "\033[1;95m║                      🎮 CLAPTRAP & SCAVTRAP 🎮             ║\033[0m" << std::endl;
+    std::cout << "\033[1;95m║                       ex01 - Serena, my love!              ║\033[0m" << std::endl;
     std::cout << "\033[1;95m╚════════════════════════════════════════════════════════════╝\033[0m" << std::endl << std::endl;
 
+    std::cout << "\033[1;33m🔥 ROUND 1: Deploying units\033[0m" << std::endl;
     ClapTrap jack("Jack the Destroyer");
-    ClapTrap bob("Bob the Tank");
-    ClapTrap defaultTrap;
+    ScavTrap bob("Bob the Scavenger");
 
-    std::cout << "\033[1;33m🔥 ROUND 1: The battle begins!\033[0m" << std::endl;
-    jack.attack("Bob");
-    bob.takeDamage(5);
+    std::cout << "\033[1;33m⚔️ ROUND 2: Different attack messages\033[0m" << std::endl;
+    jack.attack("Enemy");
+    bob.attack("Enemy");                    // ScavTrap message + 20 damage
 
-    std::cout << "\033[1;33m🛠️ ROUND 2: Bob is angry and repairs himself\033[0m" << std::endl;
-    bob.beRepaired(8);
+    std::cout << "\033[1;33m🛡️ ROUND 3: ScavTrap special ability\033[0m" << std::endl;
+    bob.guardGate();
 
-    std::cout << "\033[1;33m⚔️ ROUND 3: Jack goes full power!\033[0m" << std::endl;
-    jack.attack("Bob");
-    bob.takeDamage(7);
+    std::cout << "\033[1;33m💥 ROUND 4: Combat test\033[0m" << std::endl;
+    bob.takeDamage(30);
+    bob.beRepaired(15);
 
-    std::cout << "\033[1;33m💥 ROUND 4: JACK ENERGY RAMPAGE\033[0m" << std::endl;
-    for (int i = 0; i < 11; i++)
-        jack.attack("Bob");
+    std::cout << "\033[1;33m🧬 ROUND 5: Cloning Technology\033[0m" << std::endl;
+    ScavTrap cloneBob(bob);                 // Copy Constructor + chaining
+    cloneBob.attack("Clone Enemy");
 
-    std::cout << "\033[1;33m🧟 ROUND 5: Bob is DEAD but still tries...\033[0m" << std::endl;
-    bob.takeDamage(20);           // bob is dead after this
-    bob.attack("Jack");           // bob is dead, can't attack
-    bob.beRepaired(100);          // bob is dead, can't be repaired
+    std::cout << "\033[1;33m📋 ROUND 6: Assignment Operator\033[0m" << std::endl;
+    ScavTrap assigned;
+    assigned = cloneBob;                    // Assignment Operator
 
-    std::cout << "\033[1;33m🧬 ROUND 6: CLONING TECHNOLOGY ACTIVATED!\033[0m" << std::endl;
-    ClapTrap cloneJack(jack);                  // Copy Constructor
-    ClapTrap assignedFighter;                  
-    assignedFighter = cloneJack;               // Assignment Operator
+    std::cout << "\033[1;33m🧪 ROUND 7: Constructor/Destructor Chaining Test\033[0m" << std::endl;
+    {
+        std::cout << "   → Creating temporary ScavTrap inside scope..." << std::endl;
+        ScavTrap temp("Temporary");
+        temp.guardGate();
+        std::cout << "   → Leaving scope → temp will be destroyed now..." << std::endl;
+    }   // (ScavTrap → ClapTrap)
 
-    std::cout << "\033[1;33m🏆 FINAL ROUND: The last survivor tries to repair\033[0m" << std::endl;
-    jack.beRepaired(3);   // Jack is low on energy, can't be repaired
+    std::cout << "\033[1;33m🏆 ROUND 8: Final endurance test\033[0m" << std::endl;
+    bob.takeDamage(90);          // Bob should be at 0 HP now
+    bob.attack("Last Enemy");
+    bob.beRepaired(10);
+    bob.guardGate();
 
     std::cout << std::endl;
-    std::cout << "\033[1;92m🏁 THE BATTLE HAS ENDED!🏁\033[0m" << std::endl;
-    std::cout << "\033[1;90m(All destructors will now say goodbye...)\033[0m" << std::endl;
+    std::cout << "\033[1;92m🏁 THE BATTLE HAS ENDED! \033[0m" << std::endl;
 
     return 0;
 }
