@@ -2,84 +2,86 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
+#include "Brain.hpp"
 
+void testBasic() {
+    std::cout << "\n=== Basic Test ===" << std::endl;
+    const Animal* j = new Dog();
+    const Animal* i = new Cat();
+    j->makeSound();
+    i->makeSound();
+    delete j;
+    delete i;
+}
 
-int main()
-{
-    {
-        const Animal* meta = new Animal();
-        const Animal* j = new Dog();
-        const Animal* i = new Cat();
-
-        std::cout << j->getType() << std::endl;
-        std::cout << i->getType() << std::endl;
-
-        i->makeSound();
-        j->makeSound();
-        meta->makeSound();
-
-
-        delete meta;
-        delete j;
-        delete i;
+void testArray() {
+    std::cout << "\n=== Array Test (100 Animals) ===" << std::endl;
+    const int size = 100;
+    Animal* animals[size];
+    for (int k = 0; k < size / 2; ++k) {
+        animals[k] = new Dog();
     }
-
-    {
-        Dog d;
-        Cat c;
-
-        const Animal& a1 = d;
-        const Animal& a2 = c;
-
-        std::cout << "a1 type: " << a1.getType() << std::endl;
-        std::cout << "a2 type: " << a2.getType() << std::endl;
-
-        a1.makeSound();
-        a2.makeSound();
+    for (int k = size / 2; k < size; ++k) {
+        animals[k] = new Cat();
     }
+    for (int k = 0; k < size; ++k) {
+        animals[k]->makeSound();
+    }
+    for (int k = 0; k < size; ++k) {
+        delete animals[k];
+    }
+}
+
+void testDeepCopyDog() {
+    std::cout << "\n=== Deep Copy Test (Dog) ===" << std::endl;
+    Dog original;
+    original.getBrain()->setIdea(0, "Bone");
+    original.getBrain()->setIdea(1, "Walk");
 
     {
-        Dog d1;
-        Dog d2(d1);
-        Dog d3;
-        d3 = d1;
-
-        Cat c1;
-        Cat c2(c1);
-        Cat c3;
-        c3 = c1;
-
-        std::cout << "d1 type: " << d1.getType() << std::endl;
-        std::cout << "d2 type: " << d2.getType() << std::endl;
-        std::cout << "d3 type: " << d3.getType() << std::endl;
-
-        std::cout << "c1 type: " << c1.getType() << std::endl;
-        std::cout << "c2 type: " << c2.getType() << std::endl;
-        std::cout << "c3 type: " << c3.getType() << std::endl;
-
-        d1.makeSound();
-        c1.makeSound();
+        Dog copy = original;
+        std::cout << "Original idea 0: " << original.getBrain()->getIdea(0) << std::endl;
+        std::cout << "Copy idea 0: " << copy.getBrain()->getIdea(0) << std::endl;
+        copy.getBrain()->setIdea(0, "Changed in copy");
+        std::cout << "Original after change: " << original.getBrain()->getIdea(0) << std::endl;
+        std::cout << "Brain addresses: Original " << original.getBrain() << ", Copy " << copy.getBrain() << std::endl;
     }
+}
+
+void testDeepCopyCat() {
+    std::cout << "\n=== Deep Copy Test (Cat) ===" << std::endl;
+    Cat original;
+    original.getBrain()->setIdea(0, "Fish");
+    original.getBrain()->setIdea(1, "Sleep");
 
     {
-        const WrongAnimal* wa = new WrongAnimal();
-        const WrongAnimal* wc_as_wa = new WrongCat();
-
-        std::cout << "wa type: " << wa->getType() << std::endl;
-        std::cout << "wc_as_wa type: " << wc_as_wa->getType() << std::endl;
-
-        wa->makeSound();
-        wc_as_wa->makeSound();
-
-        const WrongCat* wc = new WrongCat();
-        wc->makeSound();
-
-        delete wa;
-        delete wc_as_wa;
-        delete wc;
+        Cat copy = original;
+        std::cout << "Original idea 0: " << original.getBrain()->getIdea(0) << std::endl;
+        std::cout << "Copy idea 0: " << copy.getBrain()->getIdea(0) << std::endl;
+        copy.getBrain()->setIdea(0, "Changed in copy");
+        std::cout << "Original after change: " << original.getBrain()->getIdea(0) << std::endl;
+        std::cout << "Brain addresses: Original " << original.getBrain() << ", Copy " << copy.getBrain() << std::endl;
     }
+}
 
+void testAssignment() {
+    std::cout << "\n=== Assignment Test ===" << std::endl;
+    Dog dog1;
+    dog1.getBrain()->setIdea(0, "Idea1");
+    Dog dog2;
+    dog2 = dog1;
+    std::cout << "Dog1 idea 0: " << dog1.getBrain()->getIdea(0) << std::endl;
+    std::cout << "Dog2 idea 0: " << dog2.getBrain()->getIdea(0) << std::endl;
+    dog1.getBrain()->setIdea(0, "Modified");
+    std::cout << "Dog2 after mod: " << dog2.getBrain()->getIdea(0) << std::endl;
+    std::cout << "Brain addresses: Dog1 " << dog1.getBrain() << ", Dog2 " << dog2.getBrain() << std::endl;
+}
+
+int main() {
+    testBasic();
+    testArray();
+    testDeepCopyDog();
+    testDeepCopyCat();
+    testAssignment();
     return 0;
 }
