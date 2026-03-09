@@ -51,6 +51,10 @@ void Bureaucrat::decrementGrade()
         throw GradeTooLowException();
     _grade++;     
 }
+void Bureaucrat::signForm(Form &form)
+{
+    form.beSigned(*this);
+}
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
