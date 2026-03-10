@@ -10,10 +10,10 @@ class AForm
         AForm();
         AForm(AForm const& other);
         AForm& operator=(AForm const& other);
-        ~AForm();
-        
+        virtual ~AForm();
+
         AForm(const std::string& name, int gradeToSign, int gradeToExecute);
-        virtual void execute(Bureaucrat const & executor) const = 0;
+        void execute(Bureaucrat const & executor) const;
         void beSigned(const Bureaucrat& bureaucrat);
         const std::string& getName() const;
         bool isSigned() const;
@@ -29,6 +29,15 @@ class AForm
             public:
                 virtual const char* what() const throw();
         };
+
+        class FormNotSignedException : public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
+
+    protected:
+        virtual void executeAction() const = 0;
+
     private:
         const std::string _name;
         bool _isSigned;
@@ -36,4 +45,4 @@ class AForm
         const int _gradeToExecute;
 };
 
-std::ostream& operator<<(std::ostream& out, const AForm& Aform);
+std::ostream& operator<<(std::ostream& out, const AForm& form);

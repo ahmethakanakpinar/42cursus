@@ -1,17 +1,17 @@
 #pragma once
 #include "AForm.hpp"
+#include <cstdlib>
 
 class RobotomyRequestForm : public AForm
 {
-public:
-    RobotomyRequestForm();
-    RobotomyRequestForm(const std::string& target);
-    RobotomyRequestForm(const RobotomyRequestForm& other);
-    ~RobotomyRequestForm();
+    public:
+        RobotomyRequestForm();
+        RobotomyRequestForm(const std::string& target);
+        RobotomyRequestForm(const RobotomyRequestForm& other);
+        RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
+        ~RobotomyRequestForm();
 
-    RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
-    void execute(const Bureaucrat& executor) const;
-
-private:
-    std::string _target;
+    private:
+        void executeAction() const;
+        std::string _target;
 };
