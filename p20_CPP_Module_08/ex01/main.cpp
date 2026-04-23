@@ -8,20 +8,20 @@ int main(void)
 {
 	// --- Subject test ---
 	std::cout << "=== Subject test ===" << std::endl;
-	Span sp = Span(5);
-	sp.addNumber(6);
-	sp.addNumber(3);
-	sp.addNumber(17);
-	sp.addNumber(9);
-	sp.addNumber(11);
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
+	Span sp = Span(5); // create a Span that can hold 5 numbers
+	sp.addNumber(6); // add one number to Span
+	sp.addNumber(3); // add one number to Span
+	sp.addNumber(17); // add one number to Span
+	sp.addNumber(9); // add one number to Span
+	sp.addNumber(11); // add one number to Span
+	std::cout << sp.shortestSpan() << std::endl; // print smallest difference between two numbers
+	std::cout << sp.longestSpan() << std::endl; // print biggest difference between two numbers
 
 	// --- Overflow test ---
 	std::cout << "\n=== Overflow test ===" << std::endl;
 	try
 	{
-		sp.addNumber(42);
+		sp.addNumber(42); // try to add when Span is full (will throw)
 	}
 	catch (const std::exception &e)
 	{
@@ -33,8 +33,8 @@ int main(void)
 	try
 	{
 		Span one(1);
-		one.addNumber(1);
-		one.shortestSpan();
+		one.addNumber(1); // add first number
+		one.shortestSpan(); // need at least 2 numbers (will throw)
 	}
 	catch (const std::exception &e)
 	{
@@ -43,14 +43,14 @@ int main(void)
 
 	// --- Range addNumber with 10000 elements ---
 	std::cout << "\n=== 10000 elements ===" << std::endl;
-	srand(time(NULL));
+	srand(time(NULL)); // seed random generator with current time
 	std::vector<int> big(10000);
 	for (size_t i = 0; i < big.size(); i++)
-		big[i] = rand();
+		big[i] = rand(); // generate random value
 	Span bigSpan(10000);
-	bigSpan.addNumber(big.begin(), big.end());
-	std::cout << "Shortest: " << bigSpan.shortestSpan() << std::endl;
-	std::cout << "Longest:  " << bigSpan.longestSpan() << std::endl;
+	bigSpan.addNumber(big.begin(), big.end()); // add all values from vector range
+	std::cout << "Shortest: " << bigSpan.shortestSpan() << std::endl; // show shortest span
+	std::cout << "Longest:  " << bigSpan.longestSpan() << std::endl; // show longest span
 
 	return 0;
 }
