@@ -11,6 +11,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
+$(OBJ): RPN.hpp
+
 clean:
 	rm -f $(OBJ)
 
