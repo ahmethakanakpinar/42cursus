@@ -18,14 +18,14 @@ RPN& RPN::operator=(const RPN& other) {
 
 RPN::~RPN() {}
 
-bool RPN::evaluate(const std::string& expr, long long& result) const {
+bool RPN::evaluate(const std::string& expr, int& result) const {
   std::istringstream iss(expr);
   std::string token;
-  std::stack<long long> values;
+  std::stack<int> values;
 
   while (iss >> token) {
     if (token.size() == 1 && std::isdigit(static_cast<unsigned char>(token[0]))) {
-      values.push(static_cast<long long>(token[0] - '0'));
+      values.push(token[0] - '0');
       continue;
     }
 
@@ -47,14 +47,14 @@ bool RPN::evaluate(const std::string& expr, long long& result) const {
   return true;
 }
 
-bool RPN::applyOperator(char op, std::stack<long long>& values) const {
+bool RPN::applyOperator(char op, std::stack<int>& values) const {
   if (values.size() < 2) {
     return false;
   }
 
-  long long rhs = values.top();
+  int rhs = values.top();
   values.pop();
-  long long lhs = values.top();
+  int lhs = values.top();
   values.pop();
 
   if (op == '+') {

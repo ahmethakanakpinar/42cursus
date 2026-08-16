@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
   }
 
   RPN rpn;
-  long long result = 0;
+  int result = 0;
   if (!rpn.evaluate(argv[1], result)) {
     std::cerr << "Error" << std::endl;
     return 1;
