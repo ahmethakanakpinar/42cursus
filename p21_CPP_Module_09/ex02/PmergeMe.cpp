@@ -1,11 +1,23 @@
 #include "PmergeMe.hpp"
 
+#include <sys/time.h>
+
 #include <cctype>
 #include <climits>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <utility>
+
+// Mikrosaniye cozunurluklu saat. std::clock() cok kaba (~10 ms) kalirdi,
+// <chrono> ise C++11 oldugu icin kullanilamiyor.
+static double nowMicroseconds() {
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  return static_cast<double>(tv.tv_sec) * 1000000.0 +
+         static_cast<double>(tv.tv_usec);
+}
 
 // Token gecerli bir pozitif tamsayi mi? Sadece rakam kabul edildigi icin
 // "-1", "+5", "abc", "3.5" hepsi elenir. Tasma da burada yakalanir.
@@ -183,12 +195,20 @@ void PmergeMe::run() {
   }
   std::cout << std::endl;
 
+  // Sureye kopyalama da dahil: subject "veri yonetimi de dahil" diyor.
+  double start = nowMicroseconds();
   std::vector<int> v(_vec);
   sortVector(v);
+  double vectorTime = nowMicroseconds() - start;
 
   std::cout << "After:";
   for (size_t i = 0; i < v.size(); ++i) {
     std::cout << " " << v[i];
   }
   std::cout << std::endl;
+
+  std::cout << std::fixed << std::setprecision(5);
+  std::cout << "Time to process a range of " << _vec.size()
+            << " elements with std::vector : " << vectorTime << " us"
+            << std::endl;
 }
