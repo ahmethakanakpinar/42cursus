@@ -188,6 +188,102 @@ void PmergeMe::sortVector(std::vector<int>& v) {
   v = chain;
 }
 
+// Buradan asagisi yukaridaki uc fonksiyonun std::deque ikizi. Subject
+// "algoritmayi her container icin ayri implemente et" dedigi icin ortak
+// bir sablona indirgenmedi; tekrar bilincli.
+
+size_t PmergeMe::binarySearchDeque(const std::deque<int>& chain, int value,
+                                   size_t hi) const {
+  size_t lo = 0;
+  while (lo < hi) {
+    size_t mid = lo + (hi - lo) / 2;
+    if (chain[mid] < value) {
+      lo = mid + 1;
+    } else {
+      hi = mid;
+    }
+  }
+  return lo;
+}
+
+void PmergeMe::insertPendDeque(std::deque<int>& chain,
+                               const std::deque<int>& pend) {
+  size_t m = pend.size();
+  if (m == 0) {
+    return;
+  }
+
+  chain.push_front(pend[0]);
+
+  std::deque<size_t> pos(m);
+  for (size_t i = 0; i < m; ++i) {
+    pos[i] = i + 1;
+  }
+
+  size_t prev = 1;
+  size_t curr = 3;
+  while (prev < m) {
+    size_t last = curr < m ? curr : m;
+    for (size_t k = last; k > prev; --k) {
+      size_t i = k - 1;
+      size_t p = binarySearchDeque(chain, pend[i], pos[i]);
+      chain.insert(chain.begin() + static_cast<ptrdiff_t>(p), pend[i]);
+      for (size_t j = 0; j < m; ++j) {
+        if (pos[j] >= p) {
+          ++pos[j];
+        }
+      }
+    }
+    size_t next = curr + 2 * prev;
+    prev = curr;
+    curr = next;
+  }
+}
+
+void PmergeMe::sortDeque(std::deque<int>& d) {
+  if (d.size() < 2) {
+    return;
+  }
+
+  bool hasOdd = (d.size() % 2 != 0);
+  int odd = hasOdd ? d.back() : 0;
+
+  std::deque<std::pair<int, int> > pairs;
+  for (size_t i = 0; i + 1 < d.size(); i += 2) {
+    if (d[i] > d[i + 1]) {
+      pairs.push_back(std::make_pair(d[i], d[i + 1]));
+    } else {
+      pairs.push_back(std::make_pair(d[i + 1], d[i]));
+    }
+  }
+
+  std::deque<int> chain;
+  for (size_t i = 0; i < pairs.size(); ++i) {
+    chain.push_back(pairs[i].first);
+  }
+  sortDeque(chain);
+
+  std::deque<int> pend(pairs.size(), 0);
+  std::deque<bool> taken(chain.size(), false);
+  for (size_t j = 0; j < pairs.size(); ++j) {
+    size_t k = binarySearchDeque(chain, pairs[j].first, chain.size());
+    while (taken[k]) {
+      ++k;
+    }
+    taken[k] = true;
+    pend[k] = pairs[j].second;
+  }
+
+  insertPendDeque(chain, pend);
+
+  if (hasOdd) {
+    size_t p = binarySearchDeque(chain, odd, chain.size());
+    chain.insert(chain.begin() + static_cast<ptrdiff_t>(p), odd);
+  }
+
+  d = chain;
+}
+
 void PmergeMe::run() {
   std::cout << "Before:";
   for (size_t i = 0; i < _vec.size(); ++i) {
@@ -201,6 +297,11 @@ void PmergeMe::run() {
   sortVector(v);
   double vectorTime = nowMicroseconds() - start;
 
+  start = nowMicroseconds();
+  std::deque<int> d(_deq);
+  sortDeque(d);
+  double dequeTime = nowMicroseconds() - start;
+
   std::cout << "After:";
   for (size_t i = 0; i < v.size(); ++i) {
     std::cout << " " << v[i];
@@ -210,5 +311,8 @@ void PmergeMe::run() {
   std::cout << std::fixed << std::setprecision(5);
   std::cout << "Time to process a range of " << _vec.size()
             << " elements with std::vector : " << vectorTime << " us"
+            << std::endl;
+  std::cout << "Time to process a range of " << _deq.size()
+            << " elements with std::deque : " << dequeTime << " us"
             << std::endl;
 }

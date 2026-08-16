@@ -29,6 +29,12 @@ class PmergeMe {
   void insertPendVector(std::vector<int>& chain, const std::vector<int>& pend);
   size_t binarySearchVector(const std::vector<int>& chain, int value,
                             size_t hi) const;
+
+  // --- Ford-Johnson, std::deque uzerinde (ayni algoritmanin ikizi) ---
+  void sortDeque(std::deque<int>& d);
+  void insertPendDeque(std::deque<int>& chain, const std::deque<int>& pend);
+  size_t binarySearchDeque(const std::deque<int>& chain, int value,
+                           size_t hi) const;
 };
 
 #endif
