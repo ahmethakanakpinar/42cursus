@@ -162,18 +162,18 @@ void PmergeMe::sortVector(std::vector<int>& v) {
   }
   sortVector(chain);
 
-  // 3) Siralama esleri bozdu; her buyugun kucugunu geri bul.
-  //    "kullanildi" isareti sayesinde tekrar eden degerlerde de dogru calisir.
-  std::vector<int> pend;
-  std::vector<bool> used(pairs.size(), false);
-  for (size_t i = 0; i < chain.size(); ++i) {
-    for (size_t j = 0; j < pairs.size(); ++j) {
-      if (!used[j] && pairs[j].first == chain[i]) {
-        pend.push_back(pairs[j].second);
-        used[j] = true;
-        break;
-      }
+  // 3) Siralama esleri bozdu; her buyugun kucugunu geri bagla.
+  //    Buyugun zincirdeki yeri ikili aramayla bulunur; o yer doluysa
+  //    (ayni degerden birden fazla varsa) bir saga kayilir.
+  std::vector<int> pend(pairs.size(), 0);
+  std::vector<bool> taken(chain.size(), false);
+  for (size_t j = 0; j < pairs.size(); ++j) {
+    size_t k = binarySearchVector(chain, pairs[j].first, chain.size());
+    while (taken[k]) {
+      ++k;
     }
+    taken[k] = true;
+    pend[k] = pairs[j].second;
   }
 
   // 4) Kucukleri yerlestir
