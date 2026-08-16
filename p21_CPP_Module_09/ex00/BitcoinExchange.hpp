@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 
+// It maintains the Bitcoin exchange rate database and processes "date | value" rows.
 class BitcoinExchange {
  public:
   BitcoinExchange();
@@ -11,19 +12,18 @@ class BitcoinExchange {
   BitcoinExchange& operator=(const BitcoinExchange& other);
   ~BitcoinExchange();
 
-  bool loadDatabase(const std::string& dbPath);
+  // The data.csv file is read and the _rates map is filled.
+  bool loadDatabase(const std::string& path);
+
+  // Processes a single line from the input file and writes the result (or error) to the output.
   void processLine(const std::string& line) const;
 
  private:
+  // Key: "YYYY-MM-DD", value: current day's rate.
+  // Since the map is sorted, the search for "nearest sub-date" takes O(log n).
   std::map<std::string, double> _rates;
 
-  static std::string trim(const std::string& s);
-  static bool parseDateParts(const std::string& date, int& year, int& month,
-                             int& day);
-  static bool isValidDate(const std::string& date);
-  static bool isLeapYear(int year);
-  static bool parseValue(const std::string& valueStr, double& value);
-  bool getRateForDate(const std::string& date, double& rate) const;
+  bool findRate(const std::string& date, double& rate) const;
 };
 
 #endif
