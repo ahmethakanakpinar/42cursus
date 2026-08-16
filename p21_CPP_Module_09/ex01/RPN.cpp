@@ -3,34 +3,33 @@
 #include <cctype>
 #include <sstream>
 
-RPN::RPN() {}
+RPN::RPN() : _values() {}
 
-RPN::RPN(const RPN& other) {
-  (void)other;
-}
+RPN::RPN(const RPN& other) : _values(other._values) {}
 
 RPN& RPN::operator=(const RPN& other) {
   if (this != &other) {
-    (void)other;
+    _values = other._values;
   }
   return *this;
 }
 
 RPN::~RPN() {}
 
-bool RPN::evaluate(const std::string& expr, int& result) const {
+bool RPN::evaluate(const std::string& expr, int& result) {
+  _values = std::stack<int>();  // ayni nesne tekrar kullanilabilsin
+
   std::istringstream iss(expr);
   std::string token;
-  std::stack<int> values;
 
   while (iss >> token) {
     if (token.size() == 1 && std::isdigit(static_cast<unsigned char>(token[0]))) {
-      values.push(token[0] - '0');
+      _values.push(token[0] - '0');
       continue;
     }
 
     if (token.size() == 1 && (token[0] == '+' || token[0] == '-' || token[0] == '*' || token[0] == '/')) {
-      if (!applyOperator(token[0], values)) {
+      if (!applyOperator(token[0])) {
         return false;
       }
       continue;
@@ -39,35 +38,35 @@ bool RPN::evaluate(const std::string& expr, int& result) const {
     return false;
   }
 
-  if (values.size() != 1) {
+  if (_values.size() != 1) {
     return false;
   }
 
-  result = values.top();
+  result = _values.top();
   return true;
 }
 
-bool RPN::applyOperator(char op, std::stack<int>& values) const {
-  if (values.size() < 2) {
+bool RPN::applyOperator(char op) {
+  if (_values.size() < 2) {
     return false;
   }
 
-  int rhs = values.top();
-  values.pop();
-  int lhs = values.top();
-  values.pop();
+  int rhs = _values.top();
+  _values.pop();
+  int lhs = _values.top();
+  _values.pop();
 
   if (op == '+') {
-    values.push(lhs + rhs);
+    _values.push(lhs + rhs);
   } else if (op == '-') {
-    values.push(lhs - rhs);
+    _values.push(lhs - rhs);
   } else if (op == '*') {
-    values.push(lhs * rhs);
+    _values.push(lhs * rhs);
   } else if (op == '/') {
     if (rhs == 0) {
       return false;
     }
-    values.push(lhs / rhs);
+    _values.push(lhs / rhs);
   } else {
     return false;
   }

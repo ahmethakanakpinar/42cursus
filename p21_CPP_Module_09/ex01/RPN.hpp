@@ -11,10 +11,13 @@ class RPN {
   RPN& operator=(const RPN& other);
   ~RPN();
 
-  bool evaluate(const std::string& expr, int& result) const;
+  bool evaluate(const std::string& expr, int& result);
 
  private:
-  bool applyOperator(char op, std::stack<int>& values) const;
+  // Operandlar burada birikir; operator gelince tepeden iki tane cekilir.
+  std::stack<int> _values;
+
+  bool applyOperator(char op);
 };
 
 #endif
