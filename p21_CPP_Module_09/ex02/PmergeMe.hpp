@@ -1,6 +1,7 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <cstddef>
 #include <deque>
 #include <vector>
 
@@ -22,6 +23,12 @@ class PmergeMe {
  private:
   std::vector<int> _vec;
   std::deque<int> _deq;
+
+  // --- Ford-Johnson, std::vector uzerinde ---
+  void sortVector(std::vector<int>& v);
+  void insertPendVector(std::vector<int>& chain, const std::vector<int>& pend);
+  size_t binarySearchVector(const std::vector<int>& chain, int value,
+                            size_t hi) const;
 };
 
 #endif
