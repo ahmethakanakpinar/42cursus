@@ -3,6 +3,20 @@
 #include <cctype>
 #include <sstream>
 
+// Token tek haneli bir sayi mi? (subject: sayilar her zaman 10'dan kucuk)
+static bool isNumberToken(const std::string& token) {
+  return token.size() == 1 && std::isdigit(static_cast<unsigned char>(token[0]));
+}
+
+// Token destekledigimiz dort operatorden biri mi?
+static bool isOperatorToken(const std::string& token) {
+  if (token.size() != 1) {
+    return false;
+  }
+  return token[0] == '+' || token[0] == '-' || token[0] == '*' ||
+         token[0] == '/';
+}
+
 RPN::RPN() : _values() {}
 
 RPN::RPN(const RPN& other) : _values(other._values) {}
@@ -23,21 +37,19 @@ bool RPN::evaluate(const std::string& expr, int& result) {
   std::string token;
 
   while (iss >> token) {
-    if (token.size() == 1 && std::isdigit(static_cast<unsigned char>(token[0]))) {
+    if (isNumberToken(token)) {
       _values.push(token[0] - '0');
       continue;
     }
-
-    if (token.size() == 1 && (token[0] == '+' || token[0] == '-' || token[0] == '*' || token[0] == '/')) {
-      if (!applyOperator(token[0])) {
-        return false;
-      }
-      continue;
+    if (!isOperatorToken(token)) {
+      return false;  // tanimsiz token: harf, parantez, cok haneli sayi...
     }
-
-    return false;
+    if (!applyOperator(token[0])) {
+      return false;  // yeterli operand yok ya da sifira bolme
+    }
   }
 
+  // Gecerli bir ifadenin sonunda yiginda tek bir sonuc kalir.
   if (_values.size() != 1) {
     return false;
   }
@@ -46,15 +58,22 @@ bool RPN::evaluate(const std::string& expr, int& result) {
   return true;
 }
 
+// Yigindan iki operand ceker, islemi uygular, sonucu geri iter.
+// Buraya sadece isOperatorToken'dan gecmis bir karakter gelebilir.
 bool RPN::applyOperator(char op) {
   if (_values.size() < 2) {
     return false;
   }
 
+  // Dikkat: once cekilen tepedeki deger sagdaki operand.
   int rhs = _values.top();
   _values.pop();
   int lhs = _values.top();
   _values.pop();
+
+  if (op == '/' && rhs == 0) {
+    return false;
+  }
 
   if (op == '+') {
     _values.push(lhs + rhs);
@@ -62,14 +81,8 @@ bool RPN::applyOperator(char op) {
     _values.push(lhs - rhs);
   } else if (op == '*') {
     _values.push(lhs * rhs);
-  } else if (op == '/') {
-    if (rhs == 0) {
-      return false;
-    }
-    _values.push(lhs / rhs);
   } else {
-    return false;
+    _values.push(lhs / rhs);
   }
-
   return true;
 }
